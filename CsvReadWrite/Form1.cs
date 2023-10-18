@@ -73,7 +73,14 @@ namespace CsvReadWrite
                     for (int j = 0; j < newLine[i].Length; j++)
                     {
                         // null‚Ìê‡‚ÍA""‚Æ‚µ‚ÄnewLine‚ÉÝ’è
-                        newLine[i][j] = (string)dataTable.Rows[i][j] ?? "";
+                        if (dataTable.Rows[i][j] == DBNull.Value)
+                        {
+                            newLine[i][j] = "";
+                        }
+                        else
+                        {
+                            newLine[i][j] = (string)dataTable.Rows[i][j];
+                        }
                     }
                 }
 
