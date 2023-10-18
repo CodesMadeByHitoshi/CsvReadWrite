@@ -1,6 +1,8 @@
 using Csv;          // ライブラリcsvを使用するのに必要
 using System.Data;  // DataTableを使うのに必要
 using System.Text;  // Encodingを使うのに必要
+using System.Windows.Forms;
+
 namespace CsvReadWrite
 {
     public partial class Form1 : Form
@@ -54,6 +56,9 @@ namespace CsvReadWrite
             {
                 // ファイルを保存するウィンドウで選んだCSVのファイル名をテキストボックスに反映
                 textBoxOutputCSVFileName.Text = saveFileDialogCsv.FileName;
+                // DataGridViewの内容を取得
+                dataTable = (DataTable)dataGridViewCsv.DataSource;
+
                 // headerという変数に内部のテーブルのカラム名を設定
                 string[] header = new string[dataTable.Columns.Count];
                 // カラムの数だけループしてカラムのデータを設定
@@ -105,7 +110,7 @@ namespace CsvReadWrite
                 // 行の名称設定
                 for(int i = 1;i <= newColumnLength;i++)
                 {
-                    dtForNewCsv.Columns.Add("C" + i.ToString(), typeof(String));
+                    dtForNewCsv.Columns.Add("データ" + i.ToString(), typeof(String));
                 }
 
                 // 列の値を設定
