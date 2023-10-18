@@ -17,20 +17,18 @@ namespace CsvReadWrite
         private void buttonCsvRead_Click(object sender, EventArgs e)
         {
             // ファイルを開くウィンドウでCSVファイルを選択し。OKボタンをクリックした時
-            if(openFileDialogCsv.ShowDialog() == DialogResult.OK)
+            if (openFileDialogCsv.ShowDialog() == DialogResult.OK)
             {
                 // ファイルを開くウィンドウで選んだCSVのファイル名をテキストボックスに反映
                 textBoxInputCSVFileName.Text = openFileDialogCsv.FileName;
                 // ファイルの全内容を文字列に読み込みます。日本語が読めこめるように、文字はutf-16でエンコードします。
-                string csv = File.ReadAllText(openFileDialogCsv.FileName,Encoding.GetEncoding("utf-16"));
+                string csv = File.ReadAllText(openFileDialogCsv.FileName, Encoding.GetEncoding("utf-16"));
 
-                dataTable.TableName = "CSVTable";   // 内部でテーブル生成します。
-                dataTable.Columns.Clear();          // 内部テーブルへのヘッダーを初期化(2連続で読み込んだ時の反応)
-                dataTable.Clear();                  // 内部テーブルのデータを初期化(2連続で読み込んだ時の反応)
+                ClearDataTable();
 
                 // CSVからヘッダー部分のデータを取得し、内部のテーブルのカラムに設定
                 // csvから1行取得し、結果をline変数に入れる。
-                foreach(ICsvLine line in CsvReader.ReadFromText(csv))
+                foreach (ICsvLine line in CsvReader.ReadFromText(csv))
                 {
                     // 1行分のデータのヘッダーの情報を取り出す
                     foreach (var item in line.Headers)
@@ -47,12 +45,12 @@ namespace CsvReadWrite
                 dataGridViewCsv.DataSource = dataTable; // 表示用のDataGridViewに内部のテーブルを割当
             }
         }
-        
+
         // CSV取込ボタンクリック時の処理
         private void buttonCsvWrite_Click(object sender, EventArgs e)
         {
             // ファイルを保存するウィンドウでCSVファイルを選択し、OKボタンをクリックしたとき
-            if(saveFileDialogCsv.ShowDialog() == DialogResult.OK)
+            if (saveFileDialogCsv.ShowDialog() == DialogResult.OK)
             {
                 // ファイルを保存するウィンドウで選んだCSVのファイル名をテキストボックスに反映
                 textBoxOutputCSVFileName.Text = saveFileDialogCsv.FileName;
@@ -89,6 +87,53 @@ namespace CsvReadWrite
                 // FileNameという名前で、outcsvの値を保存します。文字はutf-16でエンコードします。
                 File.WriteAllText(saveFileDialogCsv.FileName, outcsv, Encoding.GetEncoding("utf-16"));
             }
+        }
+
+        private void buttonCsvCreate_Click(object sender, EventArgs e)
+        {
+ 
+
+            try
+            {
+                ClearDataTable();
+
+                // 数値チェックをします
+                int newColumnLength = Convert.ToInt32(textBoxColumnLength.Text);
+                int newRowLength = Convert.ToInt32(textBoxRowLength.Text);
+                DataTable dtForNewCsv = new DataTable();
+
+                // 行の名称設定
+                for(int i = 1;i <= newColumnLength;i++)
+                {
+                    dtForNewCsv.Columns.Add("C" + i.ToString(), typeof(String));
+                }
+
+                // 列の値を設定
+                for (int i = 0; i < newRowLength; i++)
+                {
+                    dtForNewCsv.Rows.Add("");
+                }
+
+                dataGridViewCsv.DataSource = dtForNewCsv; // 表示用のDataGridViewに内部のテーブルを割当
+
+            }
+            catch (FormatException)
+            {
+                String message = "Please Enter Lengths for new CSV";
+                String caption = "Error Lengths are not entered on textbox";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBox.Show(message, caption, buttons);
+                return;
+            }
+        }
+        /// <summary>
+        /// データテーブルを初期化します
+        /// </summary>
+        private void ClearDataTable()
+        {
+            dataTable.TableName = "CSVTable";   // 内部でテーブル生成します。
+            dataTable.Columns.Clear();          // 内部テーブルへのヘッダーを初期化(2連続で読み込んだ時の反応)
+            dataTable.Clear();                  // 内部テーブルのデータを初期化(2連続で読み込んだ時の反応)
         }
     }
 }
