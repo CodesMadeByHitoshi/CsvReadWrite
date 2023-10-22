@@ -36,10 +36,10 @@
             openFileDialogCsv = new OpenFileDialog();
             saveFileDialogCsv = new SaveFileDialog();
             buttonCsvCreate = new Button();
-            textBoxRowLength = new TextBox();
             textBoxColumnLength = new TextBox();
+            textBoxRowsLength = new TextBox();
+            labelRowsLength = new Label();
             labelColumnLength = new Label();
-            labelRowLength = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCsv).BeginInit();
             SuspendLayout();
             // 
@@ -109,7 +109,7 @@
             // 
             // buttonCsvCreate
             // 
-            buttonCsvCreate.Location = new Point(923, 16);
+            buttonCsvCreate.Location = new Point(923, 12);
             buttonCsvCreate.Name = "buttonCsvCreate";
             buttonCsvCreate.Size = new Size(203, 38);
             buttonCsvCreate.TabIndex = 5;
@@ -117,47 +117,47 @@
             buttonCsvCreate.UseVisualStyleBackColor = true;
             buttonCsvCreate.Click += buttonCsvCreate_Click;
             // 
-            // textBoxRowLength
-            // 
-            textBoxRowLength.Location = new Point(643, 20);
-            textBoxRowLength.Name = "textBoxRowLength";
-            textBoxRowLength.Size = new Size(256, 31);
-            textBoxRowLength.TabIndex = 6;
-            // 
             // textBoxColumnLength
             // 
-            textBoxColumnLength.Location = new Point(199, 20);
+            textBoxColumnLength.Location = new Point(199, 16);
             textBoxColumnLength.Name = "textBoxColumnLength";
             textBoxColumnLength.Size = new Size(256, 31);
-            textBoxColumnLength.TabIndex = 7;
+            textBoxColumnLength.TabIndex = 6;
+            // 
+            // textBoxRowsLength
+            // 
+            textBoxRowsLength.Location = new Point(656, 16);
+            textBoxRowsLength.Name = "textBoxRowsLength";
+            textBoxRowsLength.Size = new Size(256, 31);
+            textBoxRowsLength.TabIndex = 7;
+            // 
+            // labelRowsLength
+            // 
+            labelRowsLength.AutoSize = true;
+            labelRowsLength.Location = new Point(461, 19);
+            labelRowsLength.Name = "labelRowsLength";
+            labelRowsLength.Size = new Size(176, 25);
+            labelRowsLength.TabIndex = 8;
+            labelRowsLength.Text = "列数を入力してください";
             // 
             // labelColumnLength
             // 
             labelColumnLength.AutoSize = true;
-            labelColumnLength.Location = new Point(17, 23);
+            labelColumnLength.Location = new Point(16, 19);
             labelColumnLength.Name = "labelColumnLength";
             labelColumnLength.Size = new Size(176, 25);
-            labelColumnLength.TabIndex = 8;
+            labelColumnLength.TabIndex = 9;
             labelColumnLength.Text = "行数を入力してください";
-            // 
-            // labelRowLength
-            // 
-            labelRowLength.AutoSize = true;
-            labelRowLength.Location = new Point(461, 23);
-            labelRowLength.Name = "labelRowLength";
-            labelRowLength.Size = new Size(176, 25);
-            labelRowLength.TabIndex = 9;
-            labelRowLength.Text = "列数を入力してください";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1143, 750);
-            Controls.Add(labelRowLength);
             Controls.Add(labelColumnLength);
+            Controls.Add(labelRowsLength);
+            Controls.Add(textBoxRowsLength);
             Controls.Add(textBoxColumnLength);
-            Controls.Add(textBoxRowLength);
             Controls.Add(buttonCsvCreate);
             Controls.Add(dataGridViewCsv);
             Controls.Add(buttonCsvWrite);
@@ -182,9 +182,9 @@
         private OpenFileDialog openFileDialogCsv;
         private SaveFileDialog saveFileDialogCsv;
         private Button buttonCsvCreate;
-        private TextBox textBoxRowLength;
         private TextBox textBoxColumnLength;
+        private TextBox textBoxRowsLength;
+        private Label labelRowsLength;
         private Label labelColumnLength;
-        private Label labelRowLength;
     }
 }

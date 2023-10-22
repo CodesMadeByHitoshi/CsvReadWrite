@@ -40,7 +40,7 @@ namespace CsvReadWrite
                     foreach (var item in line.Headers)
                     {
                         // 内部のテーブルのカラムに設定。
-                        dataTable.Columns.Add(item);    
+                        dataTable.Columns.Add(item);
                     }
                     break;
                 }
@@ -48,10 +48,10 @@ namespace CsvReadWrite
                 foreach (ICsvLine line in CsvReader.ReadFromText(csv))
                 {
                     // 1レコード分まとめて設定。
-                    dataTable.Rows.Add(line.Values);    
+                    dataTable.Rows.Add(line.Values);
                 }
                 // 表示用のDataGridViewに内部のテーブルを割当。
-                dataGridViewCsv.DataSource = dataTable; 
+                dataGridViewCsv.DataSource = dataTable;
             }
         }
 
@@ -116,12 +116,12 @@ namespace CsvReadWrite
                 ClearDataTable();
 
                 // 数値チェックをします。
-                int newColumnLength = Convert.ToInt32(textBoxColumnLength.Text);
-                int newRowLength = Convert.ToInt32(textBoxRowLength.Text);
+                int newColumnLength = Convert.ToInt32(textBoxRowsLength.Text);
+                int newRowLength = Convert.ToInt32(textBoxColumnLength.Text);
                 DataTable dtForNewCsv = new DataTable();
 
                 // 行の名称設定。
-                for(int i = 1;i <= newColumnLength;i++)
+                for (int i = 1; i <= newColumnLength; i++)
                 {
                     dtForNewCsv.Columns.Add("データ" + i.ToString(), typeof(String));
                 }
